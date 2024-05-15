@@ -1,14 +1,14 @@
 package com.example.logsignsql;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-
 import com.example.logsignsql.databinding.ActivityLoginBinding;
-import com.example.logsignsql.databinding.ActivitySignupBinding;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -29,16 +29,18 @@ public class LoginActivity extends AppCompatActivity {
                 String email = binding.loginEmail.getText().toString();
                 String password = binding.loginPassword.getText().toString();
 
-                if(email.equals("")||password.equals(""))
+                if(email.equals("") || password.equals(""))
                     Toast.makeText(LoginActivity.this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
-                else{
-                    Boolean checkCredentials = databaseHelper.checkEmailPassword(email, password);
+                else {
+                    // Băm mật khẩu đầu vào
+                    String hashedPassword = hashPassword(password);
+                    Boolean checkCredentials = databaseHelper.checkEmailPassword(email, hashedPassword);
 
                     if(checkCredentials == true){
                         Toast.makeText(LoginActivity.this, "Login Successfully!", Toast.LENGTH_SHORT).show();
                         Intent intent  = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
-                    }else{
+                    } else {
                         Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -52,5 +54,20 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    // Phương thức băm mật khẩu
+    public static String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = md.digest(password.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashedBytes) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

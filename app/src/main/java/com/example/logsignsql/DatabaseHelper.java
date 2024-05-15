@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
