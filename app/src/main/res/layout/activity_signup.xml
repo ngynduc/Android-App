@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/haha"
+    android:background="@drawable/bg"
     android:orientation="vertical"
     tools:context=".SignupActivity">
 
@@ -30,8 +30,8 @@
                 android:drawableLeft="@drawable/baseline_email_24"
                 android:drawablePadding="8dp"
                 android:hint="Email"
-                android:textSize="18sp"
-                android:padding="8dp" />
+                android:padding="8dp"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/signup_password"
@@ -42,9 +42,9 @@
                 android:drawableLeft="@drawable/baseline_block_24"
                 android:drawablePadding="8dp"
                 android:hint="Password"
-                android:textSize="18sp"
                 android:inputType="textPassword"
-                android:padding="8dp" />
+                android:padding="8dp"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/signup_confirm"
@@ -55,16 +55,16 @@
                 android:drawableLeft="@drawable/baseline_123_24"
                 android:drawablePadding="8dp"
                 android:hint="Confirm Password"
-                android:textSize="18sp"
                 android:inputType="textPassword"
-                android:padding="8dp" />
+                android:padding="8dp"
+                android:textSize="18sp" />
 
             <Button
+                android:id="@+id/signup_button"
                 android:layout_width="350dp"
                 android:layout_height="70dp"
                 android:layout_marginTop="30dp"
                 android:text="Sign Up"
-                android:id="@+id/signup_button"
                 android:textSize="18sp"
                 app:cornerRadius="30dp" />
 
